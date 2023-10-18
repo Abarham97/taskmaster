@@ -6,19 +6,19 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class AllTasks extends AppCompatActivity {
+public class TaskDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_tasks);
-        Toolbar toolbar = findViewById(R.id.toolbar4);
+        setContentView(R.layout.activity_task_detail);
+        String taskTitle = getIntent().getStringExtra("workTitle");
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setTitle("taskTitle");
-
-
+        setTitle(taskTitle);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
