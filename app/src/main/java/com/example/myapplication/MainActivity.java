@@ -7,6 +7,11 @@
     import android.widget.Button;
 
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.recyclerview.widget.LinearLayoutManager;
+    import androidx.recyclerview.widget.RecyclerView;
+
+    import java.util.ArrayList;
+    import java.util.List;
 
 
     public class MainActivity extends AppCompatActivity {
@@ -85,4 +90,26 @@
             }
             return super.onOptionsItemSelected(item);
         }
+        private void setUpListRecyclerView() {
+
+            RecyclerView taskListRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            taskListRecyclerView.setLayoutManager(layoutManager);
+
+
+            List<Task> tasks = new ArrayList<>();
+
+            tasks.add(new Task("Task 1", "Description for Task 1", Task.State.NEW));
+            tasks.add(new Task("Task 2", "Description for Task 2", Task.State.ASSIGNED));
+            tasks.add(new Task("Task 3", "Description for Task 3", Task.State.IN_PROGRESS));
+            tasks.add(new Task("Task 4", "Description for Task 4", Task.State.NEW));
+            tasks.add(new Task("Task 5", "Description for Task 5", Task.State.COMPLETE));
+
+            TaskAdapter adapter = new TaskAdapter(tasks, this);
+            taskListRecyclerView.setAdapter(adapter);
+        }
+
+
     }
