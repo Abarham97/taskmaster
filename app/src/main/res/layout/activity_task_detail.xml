@@ -9,13 +9,13 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
-        android:text=""
+        android:layout_width="358dp"
+        android:layout_height="296dp"
+        android:layout_marginTop="144dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium, justo eget sodales finibus, tellus nisl interdum ex, et varius massa nunc in nisi. Sed pellentesque fringilla sem. Nunc ac velit mauris. Suspendisse maximus felis eu suscipit tristique. Nunc semper dolor eget iaculis ultricies. In pulvinar arcu ex, et pharetra nibh congue in. Fusce velit tortor, ullamcorper vitae hendrerit et, ornare vitae ex. Ut dictum malesuada posuere."
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.698"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
