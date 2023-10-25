@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
+import androidx.room.Entity;
+
+@Entity
 public class Task {
+    public Long id;
     private String title;
     private String body;
     private State state;
