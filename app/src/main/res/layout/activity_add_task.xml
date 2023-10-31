@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="104dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/Mytask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -50,7 +50,7 @@
         tools:layout_editor_absoluteX="61dp" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/Dosomthing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -62,7 +62,7 @@
         tools:layout_editor_absoluteX="57dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addTaskbtn"
         android:layout_width="141dp"
         android:layout_height="41dp"
         android:text="ADD TASK"
@@ -88,5 +88,14 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.626"
         tools:layout_editor_absoluteX="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

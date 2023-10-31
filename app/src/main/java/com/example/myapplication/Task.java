@@ -1,21 +1,35 @@
 package com.example.myapplication;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class Task {
+    @PrimaryKey
     public Long id;
     private String title;
     private String body;
     private State state;
     public enum State {
-        NEW, ASSIGNED, IN_PROGRESS, COMPLETE
+        NEW, ASSIGNED, IN_PROGRESS, COMPLETE;
+
+        public static State fromString(String possibleTaskState){
+            for(State state : State.values()){
+                if (state.equals(possibleTaskState)){
+                    return state;
+                }
+            }
+
+            return null;
+        }
     }
 
     public Task(String title, String body, State state) {
         this.title = title;
         this.body = body;
         this.state = state;
+
+
     }
 
     public Task() {
