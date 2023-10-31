@@ -20,4 +20,8 @@ public interface  TaskDao {
 
     @Query("select * from Task where id = :id")
     Task findByAnId(long id);
+@Insert
+    void insertTask(Task task);
+@Query("select * from Task where  title= :title")
+    Task findByTitle(String title);
 }
