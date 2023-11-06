@@ -24,9 +24,10 @@
         android:ems="10"
         android:inputType="text"
         android:text="UserName"
+        app:layout_constraintBottom_toTopOf="@+id/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="209dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.Toolbar
