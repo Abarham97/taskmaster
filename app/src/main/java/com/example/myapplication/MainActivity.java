@@ -10,14 +10,11 @@
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.recyclerview.widget.LinearLayoutManager;
     import androidx.recyclerview.widget.RecyclerView;
-    import androidx.room.Room;
-
-    import java.util.List;
 
 
     public class MainActivity extends AppCompatActivity {
         public static final String DATABASE_NAME = "Tasks";
-        TaskDataBase taskDataBase;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -51,37 +48,6 @@
                 }
             });
 
-//            Button work=findViewById(R.id.work);
-//            String workTitle = work.getText().toString();
-//            Intent intent3=new Intent(MainActivity.this, TaskDetail.class);
-//            work.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    intent3.putExtra("workTitle", workTitle);
-//                    startActivity(intent3);
-//                }
-//            });
-//
-//            Button gym=findViewById(R.id.Gym);
-//            String gymTitle = gym.getText().toString();
-//            Intent intent4=new Intent(MainActivity.this, TaskDetail.class);
-//            gym.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    intent4.putExtra("workTitle", gymTitle);
-//                    startActivity(intent4);
-//                }
-//            });
-//            Button personal=findViewById(R.id.personal);
-//            String personalTitle = gym.getText().toString();
-//            Intent intent5=new Intent(MainActivity.this, TaskDetail.class);
-//            personal.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    intent5.putExtra("workTitle", personalTitle);
-//                    startActivity(intent5);
-//                }
-//            });
 
 
         }
@@ -98,14 +64,12 @@
             RecyclerView taskListRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             taskListRecyclerView.setLayoutManager(layoutManager);
-            taskDataBase = Room.databaseBuilder(getApplicationContext(), TaskDataBase.class, DATABASE_NAME)
-                    .fallbackToDestructiveMigration()
-                    .allowMainThreadQueries().build();
-            List<Task> tasks = taskDataBase.taskDao().findAll();
+
+//            List<Task> tasks = taskDataBase.taskDao().findAll();
 
 
-            TaskAdapter adapter = new TaskAdapter(tasks, this);
-            taskListRecyclerView.setAdapter(adapter);
+//            TaskAdapter adapter = new TaskAdapter(tasks, this);
+//            taskListRecyclerView.setAdapter(adapter);
         }
 
     }
