@@ -6,14 +6,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.room.Room;
+
+import com.amplifyframework.datastore.generated.model.Task;
 
 import java.util.Objects;
 
 public class TaskDetail extends AppCompatActivity {
     public static final String TASK_NAME_TAG = "Task Title";
 
-    private TaskDataBase taskDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,11 @@ public class TaskDetail extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Task task = connectToDataBaseAndFindTask(getIntent().getStringExtra("TaskTitle"));
+        Task task = null;
         setTitle(task.getTitle());
         TextView description = (TextView) findViewById(R.id.titleTextView);
         TextView state = (TextView) findViewById(R.id.State);
-        description.setText(task.getBody());
+//        description.setText(task.getBody());
         state.setText(task.getState().toString());
 
 
@@ -50,9 +51,6 @@ public class TaskDetail extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private Task connectToDataBaseAndFindTask(String title) {
-        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDataBase.class, "Tasks").allowMainThreadQueries().build();
-        return taskDatabase.taskDao().findByTitle(title);
-    }
+
 
 }
