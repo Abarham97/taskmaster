@@ -54,12 +54,12 @@ public class AddTask extends AppCompatActivity {
                    Amplify.API.mutate(
                            ModelMutation.create(task),
                            successResponse -> {
-                               Log.i("TAG", "Task saved successfully");
+                               Log.i("ISma", "Task saved successfully");
                             toast.show();
                             startActivity(tomainActivity);
                            },
                            failureResponse -> {
-                               Log.e("TAG", "Failed to save task: " + failureResponse.toString());
+                               Log.e("ISma", "Failed to save task: " + failureResponse.toString());
                               toast.show();
                            }
 
