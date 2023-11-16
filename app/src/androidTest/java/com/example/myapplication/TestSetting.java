@@ -52,7 +52,7 @@ public class TestSetting {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), withText("UserName"),
                         childAtPosition(
-                                allOf(withId(R.id.settings),
+                                allOf(withId(R.id.settingsspinner),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
@@ -63,7 +63,7 @@ public class TestSetting {
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.username), withText("test"),
                         childAtPosition(
-                                allOf(withId(R.id.settings),
+                                allOf(withId(R.id.settingsspinner),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
@@ -74,7 +74,7 @@ public class TestSetting {
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.save), withText("save"),
                         childAtPosition(
-                                allOf(withId(R.id.settings),
+                                allOf(withId(R.id.settingsspinner),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
@@ -85,7 +85,7 @@ public class TestSetting {
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.username), withText("test"),
                         childAtPosition(
-                                allOf(withId(R.id.settings),
+                                allOf(withId(R.id.settingsspinner),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
@@ -98,7 +98,7 @@ public class TestSetting {
                         childAtPosition(
                                 allOf(withId(R.id.toolbar2),
                                         childAtPosition(
-                                                withId(R.id.settings),
+                                                withId(R.id.settingsspinner),
                                                 2)),
                                 1),
                         isDisplayed()));
