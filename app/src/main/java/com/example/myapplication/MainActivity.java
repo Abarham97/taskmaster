@@ -11,6 +11,15 @@
     import androidx.recyclerview.widget.LinearLayoutManager;
     import androidx.recyclerview.widget.RecyclerView;
 
+    import com.amplifyframework.api.graphql.model.ModelMutation;
+    import com.amplifyframework.core.Amplify;
+    import com.amplifyframework.core.model.temporal.Temporal;
+    import com.amplifyframework.datastore.generated.model.Team;
+
+    import java.util.Arrays;
+    import java.util.Date;
+    import java.util.List;
+
 
     public class MainActivity extends AppCompatActivity {
         public static final String DATABASE_NAME = "Tasks";
@@ -23,6 +32,8 @@
             setUpListRecyclerView();
             Button addTask=findViewById(R.id.ADD_TASK);
             Intent intent=new Intent(MainActivity.this, AddTask.class);
+
+//            createTeams();
             addTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,6 +81,27 @@
 
 //            TaskAdapter adapter = new TaskAdapter(tasks, this);
 //            taskListRecyclerView.setAdapter(adapter);
+        }
+
+        private void createTeams() {
+            List<String> teamNames = Arrays.asList("Team1", "Team2", "Team3");
+
+            for (String teamName : teamNames) {
+                Team team = Team.builder()
+                        .name(teamName)
+                        .dateCreated(new Temporal.DateTime(new Date(), 0))
+                        .build();
+
+                createTeam(team);
+            }
+        }
+
+        private void createTeam(Team team) {
+            Amplify.API.mutate(
+                    ModelMutation.create(team),
+                    response -> Log.i("Teams", "createTeam: Created"),
+                    fail -> Log.i("Teams", "createTeam: Failed")
+            );
         }
 
     }

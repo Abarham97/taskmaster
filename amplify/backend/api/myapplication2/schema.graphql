@@ -8,6 +8,8 @@ type Task @model @auth(rules: [{allow: public}]){
   description: String
   dateCreated: AWSDateTime
   state: State
+    team : Team @belongsTo
+    teamName : String
 }
 enum State{
 NEW
@@ -15,3 +17,11 @@ ASSIGNED
 IN_PROGRESS
 COMPLETED
 }
+
+type Team @model @auth(rules : [{allow : public}]){
+id : ID!
+name : String!
+dateCreated: AWSDateTime
+tasks : [Task] @hasMany
+}
+
