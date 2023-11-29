@@ -1,12 +1,12 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "myapplication2",
+    "apiName": "newproject",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 60,
-      "apiKeyExpirationDate": "2024-01-15T11:12:15.506Z",
+      "apiKeyExpirationDate": "2024-01-15T15:41:10.678Z",
       "keyDescription": "key"
     },
     "conflictResolution": {},

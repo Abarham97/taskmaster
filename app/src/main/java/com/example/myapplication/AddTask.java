@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class AddTask extends AppCompatActivity {
     CompletableFuture<List<Team>> teamFuture = new CompletableFuture<>();
@@ -54,10 +55,25 @@ public class AddTask extends AppCompatActivity {
                 String doSome = ((EditText) findViewById(R.id.Dosomthing)).getText().toString();
                 String myTask = ((EditText) findViewById(R.id.Mytask)).getText().toString();
                 Spinner states=  findViewById(R.id.spinner);
-                Team team= (Team) ((Spinner) findViewById(R.id.TeamSpinner)).getSelectedItem();
+//                Team team= (Team) ((Spinner) findViewById(R.id.TeamSpinner)).getSelectedItem();
+                Spinner team =findViewById(R.id.TeamSpinner);
+                List<Team> contacts= null;
+                try {
+                    contacts=teamFuture.get();
+                }catch (InterruptedException ie){
+                    Log.e("TAG", " InterruptedException while getting contacts");
+                }catch (ExecutionException ee){
+                    Log.e("TAG"," ExecutionException while getting contacts");
+                }
 
-                Task task = Task.builder().title(doSome).description(myTask).dateCreated(new Temporal.DateTime(new Date(), 0)).state((State) states.getSelectedItem()).teamName(team.getName()).build();
+                String selectedContactString = team.getSelectedItem().toString();
+                Team selectedContact = contacts.stream().filter(c -> c.getName().equals(selectedContactString)).findAny().orElseThrow(RuntimeException::new);
+
+                Log.d("team", team.getSelectedItem().toString());
+                Task task = Task.builder().title(doSome).description(myTask).dateCreated(new Temporal.DateTime(new Date(), 0))
+                        .state((State) states.getSelectedItem()).teamName(selectedContact).build();
                 Log.d("task", task.toString());
+
                    Amplify.API.mutate(
                            ModelMutation.create(task),
                            successResponse -> {

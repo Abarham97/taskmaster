@@ -6,6 +6,7 @@
     import android.view.MenuItem;
     import android.view.View;
     import android.widget.Button;
+    import android.widget.Toast;
 
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@
 
     public class MainActivity extends AppCompatActivity {
         public static final String DATABASE_NAME = "Tasks";
+        public static final String TAG = "MainTaskActivity";
 
 
         @Override
@@ -30,6 +32,8 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             setUpListRecyclerView();
+
+            setUpLoginAndLogoutButton();
             Button addTask=findViewById(R.id.ADD_TASK);
             Intent intent=new Intent(MainActivity.this, AddTask.class);
 
@@ -104,4 +108,40 @@
             );
         }
 
-    }
+
+
+        private void setUpLoginAndLogoutButton() {
+            Button loginButton = (Button) findViewById(R.id.TaskAppLoginButton);
+            loginButton.setOnClickListener(v ->
+            {
+                Intent goToLogInIntent = new Intent(MainActivity.this, loginActivity.class);
+                startActivity(goToLogInIntent);
+            });
+
+            Button logoutButton = (Button) findViewById(R.id.TaskAppLogoutButton);
+            logoutButton.setOnClickListener(v ->
+            {
+                Amplify.Auth.signOut(
+                        () ->
+                        {
+                            Log.i(TAG, "Logout succeeded");
+                            runOnUiThread(() ->
+                            {
+//                                ((TextView) findViewById(R.id.textView10)).setText("");
+                            });
+                            Intent goToLogInIntent = new Intent(MainActivity.this, loginActivity.class);
+                            startActivity(goToLogInIntent);
+                        },
+                        failure ->
+                        {
+                            Log.i(TAG, "Logout failed");
+                            runOnUiThread(() ->
+                            {
+                                Toast.makeText(MainActivity.this, "Log out failed", Toast.LENGTH_LONG);
+                            });
+                        }
+                );
+            });
+
+
+        }}

@@ -7,7 +7,8 @@ query GetTask($id: ID!) {
     description
     dateCreated
     state
-    team {
+    teamId
+    teamName {
       id
       name
       dateCreated
@@ -15,10 +16,8 @@ query GetTask($id: ID!) {
       updatedAt
       __typename
     }
-    teamName
     createdAt
     updatedAt
-    teamTasksId
     __typename
   }
 }
@@ -35,10 +34,9 @@ query ListTasks(
       description
       dateCreated
       state
-      teamName
+      teamId
       createdAt
       updatedAt
-      teamTasksId
       __typename
     }
     nextToken
@@ -71,6 +69,38 @@ query ListTeams(
       id
       name
       dateCreated
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query TasksByTeamIdAndTitle(
+  $teamId: ID!
+  $title: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  tasksByTeamIdAndTitle(
+    teamId: $teamId
+    title: $title
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      title
+      description
+      dateCreated
+      state
+      teamId
       createdAt
       updatedAt
       __typename

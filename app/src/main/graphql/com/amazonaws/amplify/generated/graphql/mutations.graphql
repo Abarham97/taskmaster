@@ -10,7 +10,8 @@ mutation CreateTask(
     description
     dateCreated
     state
-    team {
+    teamId
+    teamName {
       id
       name
       dateCreated
@@ -18,10 +19,8 @@ mutation CreateTask(
       updatedAt
       __typename
     }
-    teamName
     createdAt
     updatedAt
-    teamTasksId
     __typename
   }
 }
@@ -36,7 +35,8 @@ mutation UpdateTask(
     description
     dateCreated
     state
-    team {
+    teamId
+    teamName {
       id
       name
       dateCreated
@@ -44,10 +44,8 @@ mutation UpdateTask(
       updatedAt
       __typename
     }
-    teamName
     createdAt
     updatedAt
-    teamTasksId
     __typename
   }
 }
@@ -62,7 +60,8 @@ mutation DeleteTask(
     description
     dateCreated
     state
-    team {
+    teamId
+    teamName {
       id
       name
       dateCreated
@@ -70,10 +69,8 @@ mutation DeleteTask(
       updatedAt
       __typename
     }
-    teamName
     createdAt
     updatedAt
-    teamTasksId
     __typename
   }
 }

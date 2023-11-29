@@ -2,44 +2,123 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editProductAcivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/taskdetail"
     tools:context=".TaskDetail">
 
     <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="358dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="148dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium, justo eget sodales finibus, tellus nisl interdum ex, et varius massa nunc in nisi. Sed pellentesque fringilla sem. Nunc ac velit mauris. Suspendisse maximus felis eu suscipit tristique. Nunc semper dolor eget iaculis ultricies. In pulvinar arcu ex, et pharetra nibh congue in. Fusce velit tortor, ullamcorper vitae hendrerit et, ornare vitae ex. Ut dictum malesuada posuere."
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:text="TaskName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/editTaskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:hint="Type a Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/editDesc"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/editProductProductNameEditText" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:text="description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Edit Product"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/editDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
+        android:ems="10"
+        android:hint="Type a Description"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/State"
-        android:layout_width="132dp"
-        android:layout_height="41dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:text="Progress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+    <Spinner
+        android:id="@+id/editTaskCatrgory"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskName" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="156dp"
+        android:text="Team"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Spinner
+        android:id="@+id/editTeam"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskCatrgory" />
+
+    <Button
+        android:id="@+id/editProductSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="112dp"
+        android:text="save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <Button
+        android:id="@+id/editProductDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="112dp"
+        android:text="Delete Product"
+        app:layout_constraintStart_toEndOf="@+id/editProductSaveButton"
+        app:layout_constraintTop_toBottomOf="@+id/editTeam" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
