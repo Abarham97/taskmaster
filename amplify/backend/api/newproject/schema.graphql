@@ -8,8 +8,8 @@ type Task @model @auth(rules: [{allow: public}]){
   description: String
   dateCreated: AWSDateTime
   state: State
-    team : Team @belongsTo
-    teamName : String
+    teamId :  ID! @index(name: "byTeam", sortKeyFields: ["title"])
+    teamName : Team @belongsTo(fields: ["teamId"])
 }
 enum State{
 NEW
@@ -22,6 +22,5 @@ type Team @model @auth(rules : [{allow : public}]){
 id : ID!
 name : String!
 dateCreated: AWSDateTime
-tasks : [Task] @hasMany
+tasks : [Task] @hasMany(indexName: "byTeam", fields: ["id"])
 }
-
