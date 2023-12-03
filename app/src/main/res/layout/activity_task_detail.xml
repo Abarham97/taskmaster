@@ -121,4 +121,15 @@
         android:text="Delete Product"
         app:layout_constraintStart_toEndOf="@+id/editProductSaveButton"
         app:layout_constraintTop_toBottomOf="@+id/editTeam" />
+
+    <ImageView
+        android:id="@+id/imageViewDetails"
+        android:layout_width="90dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTeam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskCatrgory"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -211,5 +215,25 @@ public class TaskDetail extends AppCompatActivity {
                     failureResponse -> Log.i(TAG,"EditProductActivity.onCreate(): failed with this response: "+ failureResponse)
             );
         });
+    }
+
+    public String taskImg;
+
+    private void updateUI() {
+        if (taskImg != null) {
+            ImageView image = findViewById(R.id.imageViewDetails);
+            Amplify.Storage.downloadFile(
+                    taskImg,
+                    new File(getApplicationContext().getFilesDir(), "downloaded_image.jpg"),
+                    result -> {
+                        Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getPath());
+                        runOnUiThread(() -> {
+                            Bitmap bitmap = BitmapFactory.decodeFile(result.getFile().getPath());
+                            image.setImageBitmap(bitmap);
+                        });
+                    },
+                    error -> Log.e("MyAmplifyApp", "Download failed", error)
+            );
+        }
     }
 }
