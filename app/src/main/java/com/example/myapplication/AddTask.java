@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +31,8 @@ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -155,6 +158,50 @@ public class AddTask extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        Intent callingIntent = getIntent();
+        if (callingIntent != null && callingIntent.getType() != null && callingIntent.getType().equals("text/plain")) {
+            String callingText = callingIntent.getStringExtra(Intent.EXTRA_TEXT);
+
+            if (callingText != null) {
+
+                String cleanedText = cleanText(callingText);
+
+
+                ((EditText) findViewById(R.id.addProductProductNameEditTExt)).setText(cleanedText);
+            }
+        }
+
+        if(callingIntent != null && callingIntent.getType() != null && callingIntent.getType().startsWith("image") ){
+            Uri incomingImageFileUri= callingIntent.getParcelableExtra(Intent.EXTRA_STREAM);
+
+            if (incomingImageFileUri != null){
+                InputStream incomingImageFileInputStream = null;
+
+                try {
+                    incomingImageFileInputStream = getContentResolver().openInputStream(incomingImageFileUri);
+
+                    ImageView productImageView = findViewById(R.id.imageView);
+
+                    if (productImageView != null) {
+
+                        productImageView.setImageBitmap(BitmapFactory.decodeStream(incomingImageFileInputStream));
+                    }else {
+                        Log.e("TAG", "ImageView is null for some reasons");
+                    }
+                }catch (FileNotFoundException fnfe){
+                    Log.e("TAG"," Could not get file stram from the URI "+fnfe.getMessage(),fnfe);
+                }
+            }
+        }
+
+    }
+
+
     public void onAddImageButtonClicked(View view) {
         if (pickMedia != null) {
             pickMedia.launch(new PickVisualMediaRequest.Builder()
@@ -187,4 +234,13 @@ public class AddTask extends AppCompatActivity {
                 }
                 return super.onOptionsItemSelected(item);
             }
+    private String cleanText(String text) {
+
+        text = text.replaceAll("\\b(?:https?|ftp):\\/\\/\\S+\\b", "");
+
+
+        text = text.replaceAll("\"", "");
+
+        return text;
+    }
         }
