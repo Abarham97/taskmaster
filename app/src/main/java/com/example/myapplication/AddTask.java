@@ -1,16 +1,23 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,6 +38,10 @@ import java.util.concurrent.ExecutionException;
 
 public class AddTask extends AppCompatActivity {
     CompletableFuture<List<Team>> teamFuture = new CompletableFuture<>();
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+    private ImageView selectedImageView;
+    private String filePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +134,49 @@ public class AddTask extends AppCompatActivity {
                 }
         );
 
+        selectedImageView = findViewById(R.id.pic);
 
+        pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            selectedImageView.setImageURI(uri);
+                            filePath = getRealPathFromURI(uri);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e("PHTACT", "Error setting image URI: " + e.getMessage());
+                        }
+                    } else {
+                        Log.d("PHTACT", "No media selected");
+                        filePath = null;
+                    }
+                });
+
+
+    }
+
+    public void onAddImageButtonClicked(View view) {
+        if (pickMedia != null) {
+            pickMedia.launch(new PickVisualMediaRequest.Builder()
+                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                    .build());
+        } else {
+            Log.e("PhotoPicker", "pickMedia is null");
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
+        if (cursor == null) {
+            return null;
+        } else {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(projection[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+            return filePath;
+        }
     }
 
             @Override
